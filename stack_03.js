@@ -32,35 +32,36 @@
 
 var evalRPN = function(tokens) {
     let numStack = [];
-    let operator = new Set()
-    operator.add('+')
-    operator.add('-')
-    operator.add('*')
-    operator.add('/')
-    
     for(let i = 0; i < tokens.length;i++){
-        if(!operator.has(tokens[i])){
-            numStack.push(tokens[i])
-        }else{
-            let num2 = numStack.pop()
-            let num1 = numStack.pop()
-            let operation = tokens[i]
-            switch(operation){
-                case '+':  numStack.push(+num1 + +num2)
-                    break
-                case '-':  numStack.push(+num1 - +num2)
-                    break
-                case '*':  numStack.push(+num1 * +num2)
-                    break
-                case '/':  
-                    if(+num1 / +num2 < 0){
-                        numStack.push(Math.ceil(+num1 / +num2))
-                    }else{
-                        numStack.push(Math.floor(+num1 / +num2))
-                    }
-                    break
-                default: console.log('error')
-            }
+        let num1 = -1
+        let num2 = -1
+        let operation = tokens[i]
+        switch(operation){
+            case '+':
+                num2 = numStack.pop()
+                num1 = numStack.pop()
+                numStack.push(+num1 + +num2)
+                break
+            case '-':
+                num2 = numStack.pop()
+                num1 = numStack.pop()
+                numStack.push(+num1 - +num2)
+                break
+            case '*':
+                num2 = numStack.pop()
+                num1 = numStack.pop()
+                numStack.push(+num1 * +num2)
+                break
+            case '/':
+                num2 = numStack.pop()
+                num1 = numStack.pop()
+                if(+num1 / +num2 < 0){
+                    numStack.push(Math.ceil(+num1 / +num2))
+                }else{
+                    numStack.push(Math.floor(+num1 / +num2))
+                }
+                break
+            default: numStack.push(tokens[i])
         }
     }
     return numStack.pop()
