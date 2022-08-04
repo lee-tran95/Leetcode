@@ -44,3 +44,17 @@ class Solution {
         return curr.val
     };
 };
+
+class Solution {
+    constructor(head) {
+        this.array = []
+        let curr = head
+        while(curr){
+            this.array.push(curr.val)
+            curr = curr.next
+        }
+    }
+    getRandom = function() {
+        return this.array[Math.floor(Math.random()*this.array.length)]
+    }
+};
