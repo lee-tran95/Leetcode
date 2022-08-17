@@ -15,53 +15,53 @@ class Node {
   
   //Preorder Traversal
   
-  // function preOrder(root){
-  //   if(!root) return;
-  //   console.log(root.value)
-  //   preOrder(root.left)
-  //   preOrder(root.right)
-  // }
+  function preOrder(root){
+    if(!root) return;
+    console.log(root.value)
+    preOrder(root.left)
+    preOrder(root.right)
+  }
   
   
   
-  // preOrder(root)
+  preOrder(root)
   
   
-  //Inorder Traversal
+  // Inorder Traversal
   
-  // function inOrder(root){
-  //   if(!root) return;
+  function inOrder(root){
+    if(!root) return;
   
-  //   inOrder(root.left);
-  //   console.log(root.value);
-  //   inOrder(root.right);
-  // }
+    inOrder(root.left);
+    console.log(root.value);
+    inOrder(root.right);
+  }
   
-  // inOrder(root)
+  inOrder(root)
   
-  //Postorder Traversal
+  // Postorder Traversal
   
-  // function postOrder(root){
-  //   if(!root) return;
-  //   postOrder(root.left);
-  //   postOrder(root.right);
-  //   console.log(root.value)
-  // }
+  function postOrder(root){
+    if(!root) return;
+    postOrder(root.left);
+    postOrder(root.right);
+    console.log(root.value)
+  }
   
-  // postOrder(root)
+  postOrder(root)
   
-  //tree height
+  // tree height
   
-  // function getTreeHeight(root){
-  //   if(!root) return -1;
+  function getTreeHeight(root){
+    if(!root) return -1;
   
-  //   let left = getTreeHeight(root.left)
-  //   let right = getTreeHeight(root.right)
+    let left = getTreeHeight(root.left)
+    let right = getTreeHeight(root.right)
   
-  //   return 1 + Math.max(left,right)
-  // }
+    return 1 + Math.max(left,right)
+  }
+  console.log(getTreeHeight(root))
   
-  // console.log(getTreeHeight(root))
   
   function levelTraversal(root) {
     if(!root) return null;
@@ -77,3 +77,33 @@ class Node {
     }
   }
   levelTraversal(root)
+
+  // number of levels in a tree
+  function numberOfLevels(root){
+  if(!root) return 0
+  let left = numberOfLevels(root.left)
+  let right = numberOfLevels(root.right)
+  return 1 + Math.max(left,right)
+}
+
+console.log(numberOfLevels(root))
+
+
+// returns node at each level
+function nodeAtLevel(root){
+  let res = [];
+  let q = [root];
+
+  while(q.length > 0){
+    let size = q.length;
+    res.push([...q])
+    for(let i = 0; i < size; i++){
+      const current  = q.shift()
+      if(current.left) q.push(current.left)
+      if(current.right) q.push(current.right)
+    }
+  }
+  return res
+}
+
+console.log(nodeAtLevel(root))
