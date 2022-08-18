@@ -107,3 +107,72 @@ function nodeAtLevel(root){
 }
 
 console.log(nodeAtLevel(root))
+
+//sum of nodes at each level iterative
+
+function sumOfNodesAtLevel(root){
+  if(!root) return
+  let res = [];
+  let q = [root];
+
+  while(q.length > 0){
+    const size = q.length;
+    let sum = 0;
+    for(let i = 0; i < size; i++){
+      const current = q.shift();
+      sum += current.value;
+      if(current.left) q.push(current.left)
+      if(current.right) q.push(current.right)
+    }
+    res.push([sum])
+  }
+  return res;
+}
+
+console.log(sumOfNodesAtLevel(root))
+
+// average of nodes at each level iterative
+
+function averageOfNodesAtLevel(root){
+  if(!root) return
+  let res = [];
+  let q = [root];
+
+  while(q.length > 0){
+    const size = q.length;
+    let sum = 0;
+    for(let i = 0; i < size; i++){
+      const current = q.shift();
+      sum += current.value;
+      if(current.left) q.push(current.left)
+      if(current.right) q.push(current.right)
+    }
+    res.push([sum/size])
+  }
+  return res;
+}
+
+console.log(averageOfNodesAtLevel(root))
+
+//Maximum node at level
+
+function maxOfNodesAtLevel(root){
+  if(!root) return
+  let res = [];
+  let q = [root];
+
+  while(q.length > 0){
+    const size = q.length;
+    let max = Number.NEGATIVE_INFINITY
+    for(let i = 0; i < size; i++){
+      const current = q.shift();
+      max = Math.max(max, current.value)
+      if(current.left) q.push(current.left)
+      if(current.right) q.push(current.right)
+    }
+    res.push([max])
+  }
+  return res;
+}
+
+console.log(maxOfNodesAtLevel(root))
