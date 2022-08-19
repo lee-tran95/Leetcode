@@ -7,7 +7,7 @@ class Node {
   }
   
   let root = new Node(1);
-  root.left = new Node(2);
+  root.left = new Node(5);
   root.right = new Node(3);
   root.left.left = new Node(4);
   root.left.right = new Node(6);
@@ -176,3 +176,67 @@ function maxOfNodesAtLevel(root){
 }
 
 console.log(maxOfNodesAtLevel(root))
+
+// Minimum node at level
+
+function minOfNodesAtLevel(root){
+  if(!root) return
+  let res = [];
+  let q = [root];
+
+  while(q.length > 0){
+    const size = q.length;
+    let min = Number.POSITIVE_INFINITY
+    for(let i = 0; i < size; i++){
+      const current = q.shift();
+      min = Math.min(min, current.value)
+      if(current.left) q.push(current.left)
+      if(current.right) q.push(current.right)
+    }
+    res.push([min])
+  }
+  return res;
+}
+
+console.log(minOfNodesAtLevel(root))
+
+//First level a node appears
+
+function firstLevelOfAppearance(root,target){
+  let level = 0;
+  let q = [root]
+  while(q.length > 0){
+    level++
+    let size = q.length;
+    for(let i = 0; i < size; i++){
+      const current = q.shift();
+      if(current.value === target) return level
+      if(current.left) q.push(current.left)
+      if(current.right) q.push(current.right)
+    }
+  }
+  return 0
+}
+
+console.log(firstLevelOfAppearance(root,5))
+
+// Last level a node appears
+
+function lastLevelOfAppearance(root,target){
+  let level = 0;
+  let res = -1
+  let q = [root]
+  while(q.length >0){
+    level++
+    let size = q.length;
+    for(let i = 0; i < size; i++){
+      const current = q.shift();
+      if(current.value === target) res = level
+      if(current.left) q.push(current.left)
+      if(current.right) q.push(current.right)
+    }
+  }
+  return res
+}
+
+console.log(lastLevelOfAppearance(root,5))
