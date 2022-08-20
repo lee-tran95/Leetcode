@@ -49,3 +49,36 @@ var reorderList = function(head) {
         
     }
 };
+
+var reorderList = function(head) {
+    let slow = head
+    let fast = head
+
+    while(fast.next && fast.next.next){
+        slow = slow.next
+        fast = fast.next.next
+    }
+    let mid = slow;
+    let prev = null;
+    let next = null;
+    while(mid){
+        next = mid.next;
+        mid.next = prev;
+        prev = mid
+        mid = next
+    }
+
+    let current = head;
+    while(current){
+        next = current.next;
+        current.next = prev;
+        prevNext = prev.next
+        prev.next = next;
+        current = next;
+        prev = prevNext;
+    }
+    return head
+};
+
+// O(n) time complexity
+// O(1) space complexity
