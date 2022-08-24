@@ -240,3 +240,31 @@ function lastLevelOfAppearance(root,target){
 }
 
 console.log(lastLevelOfAppearance(root,5))
+
+// get all leaf nodes
+
+function getLeafNodes(root){
+  if(!root) return;
+  if(!root.left && !root.right) return [root.value]
+  let left = getLeafNodes(root.left)
+  let right = getLeafNodes(root.right)
+
+  if(left && right){
+    return left  + right
+  }else if(left){
+    return left
+  }else{
+    return right
+  }
+}
+
+console.log(getLeafNodes(root))
+
+// get the size of a binary tree
+
+function getSize(root){
+  if(!root) return 0;
+  return 1 + getSize(root.left) + getSize(root.right)
+}
+
+console.log(getSize(root))
