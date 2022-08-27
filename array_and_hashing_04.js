@@ -34,3 +34,20 @@ var groupAnagrams = function(strs) {
     }
     return anagrams;
 };
+
+var groupAnagrams = function(strs) {
+    let map = {};
+    for(let word of strs){
+        let sorted = word.split('').sort().join('')
+        if(map[sorted]){
+            map[sorted].push(word)
+        }else{
+            map[sorted] = [word]
+        }
+    }
+    let res = []
+    for(let key in map){
+        res.push(map[key])
+    }
+    return res
+};
