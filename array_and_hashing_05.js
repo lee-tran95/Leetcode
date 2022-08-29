@@ -40,3 +40,15 @@ var topKFrequent = function(nums, k) {
     return res.splice(res.length - k)
     
 };
+
+var topKFrequent = function(nums, k) {
+    let count = {};
+    for(let num of nums){
+        count[num] = (count[num] || 0) + 1
+    }
+    let sorted = Object.keys(count).sort((a,b) => count[b] - count[a])
+    return sorted.slice(0,k)
+    
+};
+// O(nlogn) time
+// O(n) space
