@@ -51,3 +51,38 @@ var threeSum = function(nums) {
     }
     return res;
 };
+
+var threeSum = function(nums) {
+    let sortedNums = nums.sort((a,b) => a-b)
+    let res = [];
+    if(nums.length < 3) return res;
+    
+    for(let i = 0; i < sortedNums.length; i++){
+        if(sortedNums[i] > 0) return res;
+        if(i > 0){
+             if(sortedNums[i] === sortedNums[i-1]) continue;
+        }
+        let a = i;
+        let left = i+1;
+        let right = sortedNums.length -1;
+        
+        while(left < right){
+            let sum = sortedNums[a] + sortedNums[left] + sortedNums[right]
+            if(sum === 0){
+                res.push([sortedNums[a],sortedNums[left],sortedNums[right]])
+                left++
+                while(left < right && sortedNums[left] === sortedNums[left-1]){
+                    left++
+                }
+            }else if (sum > 0){
+                right--
+            }else if (sum < 0){
+                left++
+            }
+        }
+    }
+    return res
+};
+
+// O(n^2) time complexity
+// O(n) space complexity
