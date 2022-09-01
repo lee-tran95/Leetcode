@@ -41,3 +41,23 @@ var maxArea = function(height) {
     }
     return max;
 };
+
+var maxArea = function(height) {
+    let max = 0;
+    let left = 0;
+    let right = height.length -1;
+    
+    while(left < right){
+        let currentMax = Math.min(height[left],height[right]) * (right-left);
+        max = Math.max(max,currentMax);
+        if(height[left] <= height[right]){
+            left++
+        }else{
+            right--
+        }
+    }
+    return max;
+};
+
+//O(n) time complexity
+//O(1) space complexity
