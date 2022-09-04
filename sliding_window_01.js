@@ -39,3 +39,21 @@ var maxProfit = function(prices) {
     }
     return maxP;
 };
+
+var maxProfit = function(prices) {
+    let res = 0;
+    let left = 0;
+    let right = 1;
+     while(right < prices.length){
+         if(prices[left] < prices[right]){
+             res = Math.max(res, prices[right] - prices[left])
+         }else if(prices[left] > prices[right]){
+             left = right
+         }
+         right++
+     }
+    return res
+};
+
+// O(n) time complexity
+// O(n) space complexity

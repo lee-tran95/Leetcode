@@ -39,3 +39,32 @@ var lengthOfLongestSubstring = function(s) {
     }
     return maxLength
 }
+
+var lengthOfLongestSubstring = function(s) {
+    let arr = s.split('');
+    let left = 0;
+    let right = 0;
+    let max = 0;
+    let map = {};
+    let currMax = 0;
+    
+    while(right < arr.length){
+        const curr = arr[right]
+        currMax++
+        map[curr] = (map[curr] || 0) + 1
+        if(map[curr] === 1){
+            max = Math.max(max,currMax)
+        }else{
+            while(map[curr] !== 1){
+                map[arr[left]]--
+                currMax--
+                left++
+            }
+        }
+        right++
+    }
+    return max
+};
+
+//O(n) time complexity
+//O(n) space complexity
