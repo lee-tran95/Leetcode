@@ -46,3 +46,36 @@ var checkInclusion = function(s1, s2) {
     }
     return false;
 };
+
+var checkInclusion = function(s1, s2) {
+    let stringPerm = {};
+    let currentPerm = {};
+    let currentLength = 0;
+    let left = 0;
+    
+    for(let char of s1) stringPerm[char] = (stringPerm[char] || 0) + 1
+    
+    for(let i = 0; i < s2.length; i++){
+        if(currentLength < s1.length){
+            currentPerm[s2[i]] = (currentPerm[s2[i]] || 0) + 1
+            currentLength++
+        }
+        
+        if(currentLength === s1.length){
+            let same = true
+            for(let key in stringPerm){
+                if(stringPerm[key]!== currentPerm[key]){
+                    currentPerm[s2[left]]--
+                    currentLength--
+                    left++
+                    same = false;
+                    break;
+                }
+            }
+            if(same === true) return true
+        }
+    }
+    return false
+};
+// O(n)time complexity
+// O(n) space complexity
