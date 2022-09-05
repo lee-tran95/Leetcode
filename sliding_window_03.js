@@ -39,3 +39,30 @@ var characterReplacement = function(s, k) {
     }
     return res;
 };
+
+var characterReplacement = function(s, k) {
+    let count = {}
+    let res = 0;
+    let left = 0;
+    let most = 0;
+    
+    for(let right = 0; right < s.length; right++){
+        const curr = s[right];
+        count[curr] = (count[curr]||0) + 1;
+        for(let key in count){
+            most = Math.max(most,count[key])
+        }
+        while(right - left + 1 - most > k){
+            count[s[left]]--
+            left++
+            for(let key in count){
+            most = Math.max(most,count[key])
+            }
+        }
+        res = Math.max(right-left+1)
+    }
+    return res
+};
+
+// O(n) time complexity
+// O(n) space complexity
