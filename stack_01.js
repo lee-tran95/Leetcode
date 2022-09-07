@@ -40,3 +40,25 @@ var isValid = function(s) {
     }
     return stack.length === 0 ? true : false;
 };
+
+var isValid = function(s) {
+    let stack = [];
+    let map = {
+        '(':')',
+        '{':'}',
+        '[':']'
+    }
+    
+    for(let item of s){
+        if(item in map){
+            stack.push(item)
+        }else{
+            const current = stack.pop()
+            if(map[current]!== item) return false
+        }
+    }
+    return stack.length === 0? true:false
+};
+
+// O(n) time complexity
+// O(n) space complexity
