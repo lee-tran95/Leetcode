@@ -101,3 +101,6 @@ var evalRPN = function(tokens) {
     }
     return stack.pop()
 };
+
+//O(n) time complexity
+//O(n) space complexity
