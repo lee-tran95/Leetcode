@@ -66,3 +66,38 @@ var evalRPN = function(tokens) {
     }
     return numStack.pop()
 };
+
+var evalRPN = function(tokens) {
+    let stack = []
+    for(let item of tokens){
+        if(item == "+"){
+            const second = stack.pop()
+            const first = stack.pop()
+            const res = +first + +second
+            stack.push(res)
+        }else if(item == "-"){
+            const second = stack.pop()
+            const first = stack.pop()
+            const res = +first - +second
+            stack.push(res)
+        }else if(item == "*"){
+            const second = stack.pop()
+            const first = stack.pop()
+            const res = +first * +second
+            stack.push(res)
+        }else if(item == "/"){
+            const second = stack.pop()
+            const first = stack.pop()
+            if(+first / +second < 0){
+                const res = Math.ceil(+first / +second)
+                stack.push(res)
+            }else{
+                const res = Math.floor(+first / +second)
+                stack.push(res)
+            }
+        }else{
+            stack.push(+item)
+        }
+    }
+    return stack.pop()
+};
