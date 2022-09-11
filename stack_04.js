@@ -62,3 +62,32 @@ var generateParenthesis = function(n) {
     recursive(openCount,closedCount,path)
     return res
 };
+
+var generateParenthesis = function(n) {
+    let res = []
+    let stack = []
+    let openCount = 0
+    let closedCount = 0
+    
+    function recursive (openCount, closedCount){
+        if(openCount === n && closedCount === n){
+            res.push(stack.join(''))
+            return
+        }
+        if(openCount < n){
+            stack.push('(')
+            recursive(openCount+1,closedCount)
+            stack.pop()
+        }
+        if(closedCount < openCount){
+            stack.push(')')
+            recursive(openCount,closedCount+1)
+            stack.pop()
+        }
+    }
+     recursive(openCount,closedCount)
+     return res
+ };
+
+ //2^n time complexity
+ 
