@@ -34,3 +34,23 @@ var dailyTemperatures = function(temperatures) {
     }
     return res;
   };
+
+  var dailyTemperatures = function(temperatures) {
+    let answer = [];
+    let stack = [0];
+    for(let i = 1; i < temperatures.length; i++){
+        let current = temperatures[i]
+        while(current > temperatures[stack[stack.length-1]] && stack.length > 0){
+            let day = stack.pop()
+            answer[day] = i - day
+        }
+        stack.push(i)
+    }
+    for(let i = 0; i < stack.length; i++){
+        answer[stack[i]] = 0;
+    }
+    return answer
+};
+
+// O(n) time complexity
+// O(n) space complexity
