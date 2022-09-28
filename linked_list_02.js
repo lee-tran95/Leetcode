@@ -1,4 +1,4 @@
-// You are given the heads of two sorted linked lists list1 and list2.
+    // You are given the heads of two sorted linked lists list1 and list2.
 
 // Merge the two lists in a one sorted list. The list should be made by splicing together the nodes of the first two lists.
 
@@ -46,3 +46,27 @@ var mergeTwoLists = function(list1, list2) {
     
     return dummy.next
 };
+
+var mergeTwoLists = function(list1, list2) {
+    let merged = new ListNode(null)
+    let current = merged;
+    
+    while(list1 && list2){
+        if(list1.val <= list2.val){
+            current.next = list1
+            current = current.next
+            list1 = list1.next
+        }else{
+            current.next = list2
+            current = current.next
+            list2 = list2.next
+        }
+    }
+    if(list1) current.next = list1
+    if(list2) current.next = list2
+    
+    return merged.next
+};
+
+// O(n*m) time complexity
+// O(1) space complexity
