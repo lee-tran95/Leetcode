@@ -58,3 +58,53 @@ var addTwoNumbers = function(l1, l2) {
     }
     return dummy.next
 };
+
+var addTwoNumbers = function(l1, l2) {
+    if(!l1 && !l2){
+        return null
+    }else if(!l1){
+        return l2
+    }else if(!l2){
+        return l1
+    }
+    let dummy = new ListNode(0)
+    let current = dummy;
+    let carry = 0;
+    let remainder = 0;
+
+    while(l1 && l2){
+        remainder = (l1.val + l2.val + carry) %10
+        carry = Math.floor((l1.val + l2.val + carry) / 10)
+        current.next = new ListNode(remainder)
+        current = current.next
+        l1 = l1.next
+        l2 = l2.next
+    }
+
+    if(l1){
+        while(l1){
+            remainder = (l1.val + carry) %10
+            carry = Math.floor((l1.val + carry) / 10)
+            current.next = new ListNode(remainder)
+            current = current.next
+            l1 = l1.next
+        }
+    }
+
+    if(l2){
+        while(l2){
+            remainder = (l2.val + carry) %10
+            carry = Math.floor((l2.val + carry) / 10)
+            current.next = new ListNode(remainder)
+            current = current.next
+            l2 = l2.next
+        }
+    }
+    if(carry > 0){
+            current.next = new ListNode(carry)
+        }
+    return dummy.next
+};
+
+// O(n+m) time complexity
+// O(1) space complexit
