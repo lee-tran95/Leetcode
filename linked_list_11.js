@@ -100,3 +100,66 @@ class LRUCache {
         }
     }
 }
+
+class Node {
+    constructor(key, value, next = null, prev = null){
+        this.key = key;
+        this.value = value;
+        this.next = next;
+        this.prev = prev;
+    }
+}
+
+class LRUCache {
+    constructor(cap){
+        this.cap = cap;
+        this.size = 0;
+        this.cache = {};
+        this.left = new Node(0,0)
+        this.right = new Node(0,0)
+        this.left.next = this.right;
+        this.right.prev = this.left;
+    }
+
+    remove(node){
+        let next = node.next;
+        let prev = node.prev;
+        next.prev = prev;
+        prev.next = next;
+    }
+
+    insert(node){
+        let prev = this.right.prev;
+        let next = this.right;
+        prev.next = node;
+        node.prev = prev;
+        node.next = next;
+        next.prev = node;
+    }
+
+    get(key){
+        if(this.cache[key] !== undefined){
+            this.remove(this.cache[key]);
+            this.insert(this.cache[key]);
+            return this.cache[key].value
+        }else{
+            return -1
+        }
+    }
+
+    put(key,value){
+        if(this.cache[key]!== undefined){
+            this.remove(this.cache[key]);
+            this.size--;
+        }
+        this.cache[key] = new Node(key,value)
+        this.insert(this.cache[key])
+        this.size++
+        if(this.size > this.cap){
+            let lru = this.left.next
+            this.remove(lru)
+            delete this.cache[lru.key]
+            this.size--
+        }
+    }
+}
